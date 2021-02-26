@@ -10,6 +10,7 @@ T* create_array(int size, double min, double max) {
   }
   return arr;
 }
+ 
 
 template <typename T>
 bool isSorted(T* arr, int size) {
