@@ -4,32 +4,42 @@
 #include <cstring>
 #include <time.h>
 #include "util.h"
-
-
+#include "flashier.h"
+#include "flash.h"
 
 
 template<typename T>
 void test_array(int N, bool print = false) { 
-  T * arr = create_array<T>(N, 1.0, 6.0);
-  
+  T* init_arr = create_array<T>(N, 1.0, 6.0);
+  T* arr = (T *)malloc(N * sizeof(T)); 
   if (print) {
     printf("Before: ");
-    print_array(arr, N);
+    print_array(init_arr, N);
     printf("\n");
   }
     
-
-  flashierSort<T>(arr, N);
+  std::memcpy(arr, init_arr, N * sizeof(T));
+  flash_sort<T>(arr, N);
   if (print) {
-    printf("After: ");
+    printf("After Flash Sort: ");
     print_array(arr, N);
     printf("\n");
   }
+  printf("Is Sorted: %s\n", (isSorted<T>(arr, N) ? "True" : "False"));
 
-  printf("Is Sorted: %s", (isSorted<T>(arr, N) ? "True" : "False"));
+  std::memcpy(arr, init_arr, N * sizeof(T));
+  flashier_sort<T>(arr, N);
+  if (print) {
+    printf("After Flashier Sort: ");
+    print_array(arr, N);
+    printf("\n"); 
+  }
+  printf("Is Sorted: %s\n", (isSorted<T>(arr, N) ? "True" : "False"));
+
   free(arr);
+  free(init_arr);
 }
 
 int main() {
-  test_array<double>(100000);
+  test_array<float>(15, true);
 }
