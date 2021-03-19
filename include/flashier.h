@@ -163,7 +163,7 @@ void flashier_sort_optim(T* arr, int n) {
     if (collisions[i]>1) offset += collisions[i]-1; // there are collisions, increase offset
   }
 
-  // 4 - Place numbers to the new array
+  // 4 - Place numbers to a new array
   newArr = (T *)calloc(n, sizeof(T));
   for (i = 0; i<n-maxCount; i++) {
     // Calculate position
@@ -174,12 +174,10 @@ void flashier_sort_optim(T* arr, int n) {
     collisions[pos]--;
   }
 
-  // 6 - Transfer back
-  for (i = 0; i<n-maxCount; i++) {
-    arr[i] = newArr[i];
-  }
+  // 5 - Transfer back
+  std::memcpy(arr, newArr, (n-maxCount) * sizeof(T));
 
-  // 5 - Do modified insertion sort on the array [ O(n^2) time O(1) space, but insertion sort is working on a nearly sorted array ]
+  // 6 - Do modified insertion sort on the array [ O(n^2) time O(1) space, but insertion sort is working on a nearly sorted array ]
   // TODO: needs work here...
   i = 0;
   j = i+1;
