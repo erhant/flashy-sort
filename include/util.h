@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-  
+#include <string.h>
+
+// used for command line arguments
+#ifndef MATCH_INPUT
+#define MATCH_INPUT(s) (!strcmp(argv[ac], (s))) 
+#endif
 
 template <typename T>
 T* create_array(int size, double min, double max) {
@@ -19,17 +24,20 @@ bool isSorted(T* arr, int size) {
   return true;
 }
 
-void print_array(double* arr, int size) {
+void print_array(double* arr, int size, const char * title="Array") {
+  printf("%s:\n", title);
   for (int i = 0; i<size; i++) {
     printf("%lf ", arr[i]);
   }
 }
-void print_array(float* arr, int size) {
+void print_array(float* arr, int size, const char * title="Array") {
+  printf("%s:\n", title);
   for (int i = 0; i<size; i++) {
     printf("%f ", arr[i]);
   }
 }
-void print_array(int* arr, int size) {
+void print_array(int* arr, int size, const char * title="Array") {
+  printf("%s:\n", title);
   for (int i = 0; i<size; i++) {
     printf("%d ", arr[i]);
   }
