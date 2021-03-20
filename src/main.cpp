@@ -12,21 +12,24 @@
 template<typename T>
 void test_array(int N, bool print = false) { 
   T* init_arr = create_array<T>(N, 1.0, 6.0);
-  T* arr = (T *)malloc(N * sizeof(T)); 
-  if (print) { 
-    print_array(init_arr, N, "Before: "); 
-  }
+  T* arr = (T *)malloc(N * sizeof(T));  
     
   std::memcpy(arr, init_arr, N * sizeof(T));
-  flash_sort<T>(arr, N);
   if (print) { 
+    print_array(arr, N, "Before: "); 
+  }
+  flash_sort<T>(arr, N);
+  if (print) {  
     print_array(arr, N, "\nAfter Flash Sort: "); 
   }
-  printf("\nIs Sorted: %s\n", (isSorted<T>(arr, N) ? "True" : "False"));
+  printf("\nIs Sorted: %s\n\n", (isSorted<T>(arr, N) ? "True" : "False"));
 
   std::memcpy(arr, init_arr, N * sizeof(T));
-  flashier_sort_optim<T>(arr, N);
   if (print) { 
+    print_array(arr, N, "Before: ");  
+  }
+  flashier_sort_optim<T>(arr, N);
+  if (print) {  
     print_array(arr, N, "\nAfter Flashier Sort: "); 
   }
   printf("\nIs Sorted: %s\n", (isSorted<T>(arr, N) ? "True" : "False"));
