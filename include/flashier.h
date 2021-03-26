@@ -2,8 +2,6 @@
  * Flashier Sort.
  * 
  * Independently written by Erhan Tezcan. It uses a similar logic to Flash Sort.
- * 
- * Note: the first version had newCollisions array, but it is easily possible to use collisions only!
  */
 
 
@@ -11,7 +9,7 @@
 #include <math.h> 
 #include <assert.h>
 
-// This is the initial implementation from years ago
+// This is the initial code from years ago (2016-ish)! It has A LOT OF redundant code in it.
 template <typename T>
 void flashier_sort(T* arr, int n) { 
   // Variables
@@ -44,7 +42,7 @@ void flashier_sort(T* arr, int n) {
     if (collisions[i]>1) offset += collisions[i]-1; // there are collisions, increase offset
   }
 
-  // 4 - Update collisions with regard to offsets [ O(n) time O(n) space ] TODO: maybe we dont need newCollisions array here
+  // 4 - Update collisions with regard to offsets [ O(n) time O(n) space ] 
   newCollisions = (int *)calloc(n, sizeof(int)); // initially zeros
   for(i = 0; i<n; i++)
     if (collisions[i]!=0)
@@ -104,46 +102,4 @@ void flashier_sort(T* arr, int n) {
   free(offsets); 
 }
 
-/*
-// 1 - Find min and max [ O(n) time, O(1) space ], while placing maxes to the end and mins to the start 
-  T arrmin, arrmax, tmp;
-  arrmin = arr[0];
-  arrmax = arr[n-1];
-  int maxCount = 1, minCount = 1;
-  for (i = 1; i < n-1; i++) {
-    if (arr[i] < arrmin) { // new min found, put to start
-      arrmin = arr[i]; 
-      tmp = arr[0];
-      arr[0] = arr[i];
-      arr[i] = tmp;
-      minCount = 1; // reset counter
-    } else if (arr[i] == arrmin) {
-      tmp = arr[0 + minCount];
-      arr[0 + minCount] = arr[i];
-      arr[i] = tmp;
-      minCount++;
-    }     
-    
-    if (arr[i] > arrmax) { // new max found, put to end
-      arrmax = arr[i];
-      tmp = arr[n - 1];
-      arr[n - 1] = arr[i];
-      arr[i] = tmp;
-      maxCount = 1; // reset counter
-    } else if (arr[i] == arrmax) { // other max's found, put to next position
-      tmp = arr[n - 1 - maxCount];
-      arr[n - 1 - maxCount] = arr[i];
-      arr[i] = tmp;
-      maxCount++;
-    }
-  }
-
-TO DO:
-- 1) We can perhaps use array instead of newArray, by doing in-place. This is because the positioning system gives us a 1-to-1 mapping.
-- 2) We can eliminate maxPlacer by placing max values at the start (code above) and then working with the rest of the array for the rest. We can also deal with mins there too.
-- 3) Calculate the denominator of pos just once to make that faster.
-- 4) Remove redundant castings from pos calculations.
-- 5) We can perhaps use collisions array instead of newCollisions, by doing in-place. Because i + offsets[i] are unique for each i it seems.
-
-- Write this code in Python to work with it, in a notebook perhaps.
-*/
+ 
