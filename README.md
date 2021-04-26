@@ -1,6 +1,5 @@
-# flashier_sort
-Flashier Sort is a sorting algorithm similar to Flash Sort.
-However, it does not have an extra paramter, or no bins. Instead it operates on new arrays, calculating `collisions` and `offsets`.
+# Flashy Sort
+Flashy Sort is a sorting algorithm similar to Flash Sort.
 
 ## TO DO:
 - 1) We can perhaps use array instead of newArray, by doing in-place. This is because the positioning system gives us a 1-to-1 mapping.
@@ -9,4 +8,3 @@ However, it does not have an extra paramter, or no bins. Instead it operates on 
 - 4) Remove redundant castings from pos calculations.
 - 5) We can perhaps use collisions array instead of newCollisions, by doing in-place. Because i + offsets[i] are unique for each i it seems.
 - 6) Fix the insertion sort part. Also is normal insertion over whole array good or can we make it better?
-- 7) Write this code in Python to work with it and analyze it, in a notebook perhaps.
