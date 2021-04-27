@@ -1,5 +1,5 @@
 CC = g++
-CCFLAGS = -O3  
+CCFLAGS = -O3
 TARGET = sort
 INCLUDES = -Iinclude
 SOURCES = src/main.cpp
