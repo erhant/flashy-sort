@@ -31,8 +31,7 @@ void flashsort_sub(T* a, int n, double scaleFactor) {
 		if (a[i] < a[nmin]) nmin = i;
 		else if (a[i] > a[nmax]) nmax = i;
 	}
-
-	if (a[nmax] == a[nmin])	return; // Array is sorted (max = min)
+	if (a[nmax] == a[nmin])	return; // array is sorted (max = min)
 
 	c1 = (m-1.0) / (a[nmax]-a[nmin]);
 	c2 = a[nmin];
