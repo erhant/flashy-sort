@@ -1,13 +1,10 @@
 /** 
  * FlashSort.java - integer version  
- * Translation of Karl-Dietrich Neubert's algorithm into Java by   
-
-
- * Rosanne Zhang  
+ * Translation of Karl-Dietrich Neubert's algorithm into Java
+ * by Rosanne Zhang  
  * at www.webappcabaret.com/javachina 
- * Timing measurement included 
- * Full functional application 
-
+ *
+ * Code slightly modified by Erhan Tezcan
  */
    
 class FlashSort {
@@ -83,10 +80,10 @@ class FlashSort {
   */ 
   private static void partialFlashSort() {
     int i = 0, j = 0, k = 0;
+     
+    /***** CLASS FORMATION ****/
     int anmin = a[0];
-    int nmax  = 0;
-
-
+    int nmax  = 0; 
     for (i=1; i < n; i++) {
       if (a[i] < anmin) anmin=a[i];
       if (a[i] > a[nmax]) nmax=i;            
@@ -95,8 +92,8 @@ class FlashSort {
  
     double c1 = ((double)m - 1)/(a[nmax] - anmin); 
     for (i=0; i < n; i++) {
-        k=(int)(c1*(a[i] - anmin));
-        l[k]++;
+      k=(int)(c1*(a[i] - anmin));
+      l[k]++;
     } 
     //printArray(l);
  

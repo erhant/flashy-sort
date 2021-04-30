@@ -1,9 +1,0 @@
-Flash Sort:
-  - Results are wrong
-  For low N values, the results seem to be wrong, need to find out why.
-
-Flashy Sort:
-  - There is an implementation `flashy_sort_2` with in-place placements. Can we modify that to use just one array `collisions` and get rid of `placements` array?
-  + If not, the `flash_sort` implementation is good, it uses an additional array to write on to, and then uses `memcpy` to write back. This may also be faster than the in-place method.
- 
- 

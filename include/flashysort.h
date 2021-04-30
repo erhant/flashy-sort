@@ -1,17 +1,7 @@
-/**
- * Flashy Sort.
- * 
- * Independently written by Erhan Tezcan. It uses a similar logic to Flash Sort.
- */
-#include <stdio.h> 
-#include <math.h> 
-#include <assert.h>
-
-
-
-
  /**
   * @brief Sort an array of numeric values using Flashier Sort.
+  * Uses an extra array to calculate collisions, and uses one more array to write
+  * the nearly-sorted array. Then, that array is copied back to go into insertion sort.
   * 
   * @tparam T: type of the array
   * @param arr: array pointer
@@ -87,8 +77,6 @@ void flashy_sort(T* arr, int n) {
  /**
   * @brief Sort an array of numeric values using Flashier Sort.
   * 
-  * 
-  * 
   * @tparam T: type of the array
   * @param arr: array pointer
   * @param n: size of the array 
@@ -153,12 +141,12 @@ void flashy_sort_2(T* arr, int n) {
   } 
 
   // 6 - Insertion Sort [ O(n^2) time worst, but is working on a nearly sorted array ]
-  for (i = 1; i<n - maxctr; ++i) { 
+  for (i = 1; i < n - maxctr; ++i) { 
     tmp = arr[i];
     j = i-1;
     while (j >= 0 && tmp < arr[j]) {
       arr[j + 1] = arr[j];
-      j -= 1;
+      j--;
     }
     arr[j + 1] = tmp;
   }
@@ -168,8 +156,15 @@ void flashy_sort_2(T* arr, int n) {
 }
 
 
-
-// This is the initial code from years ago (2016-ish)! It has A LOT OF redundant code in it.
+/**
+ * @brief This is the initial code from 2016, just for the record. 
+ * It is badly written, and has lots of redundant complexity in it.
+ * Kind of my "baby-steps" in programming I guess.
+ * 
+ * @tparam T: type of the array
+ * @param arr: input array
+ * @param n: size of the array
+ */
 template <typename T>
 void flashy_sort_old(T* arr, int n) { 
   // Variables

@@ -49,21 +49,24 @@ bool isSorted(T* arr, int size) {
   return true;
 }
 
-void print_array(double* arr, int size, const char * title="Array") {
-  printf("%s:\n", title);
+void print_array(double* arr, int size, const char * title="Array:") {
+  printf("%s\n", title);
   for (int i = 0; i<size; i++) {
     printf("%lf ", arr[i]);
   }
+  printf("\n");
 }
-void print_array(float* arr, int size, const char * title="Array") {
-  printf("%s:\n", title);
+void print_array(float* arr, int size, const char * title="Array:") {
+  printf("%s\n", title);
   for (int i = 0; i<size; i++) {
     printf("%f ", arr[i]);
   }
+  printf("\n");
 }
-void print_array(int* arr, int size, const char * title="Array") {
-  printf("%s:\n", title);
+void print_array(int* arr, int size, const char * title="Array:") {
+  printf("%s\n", title);
   for (int i = 0; i<size; i++) {
     printf("%d ", arr[i]);
   }
+  printf("\n");
 }
