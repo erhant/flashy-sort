@@ -9,6 +9,8 @@ Taken from http://www.yendor.com/programming/sort/Jann/SortLibrary/SortLibrary/f
 and modified to not use recursion.
 */
  
+ // TODO: fix max finding swapping thing
+ 
 template <typename T>
 void flash_sort(T* a, int n, double scaleFactor = 0.1) {
 	int *l, nmin, nmax, i, j, k, nmove; 

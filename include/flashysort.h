@@ -10,9 +10,7 @@
 template <typename T>
 void flashy_sort(T* arr, int n) { 
   // Variables
-  int pos, i, j, offset, maxctr = 0;
-  int *collisions, c_i, p_i; 
-  size_t m; // n - maxctr
+  int pos, i, j, maxctr = 0;  
   T arrmin, arrmax, tmp, *newArr;
 
   // 1 - Find min and max, place max values at the end [ O(n) time, O(1) space ]
@@ -31,16 +29,17 @@ void flashy_sort(T* arr, int n) {
     }
   }
 
-  m = n - maxctr;
-  const double pos_const = double(arrmax-arrmin) / double(n-1); // constant denom
+  const size_t m = n - maxctr;
+  const double pos_const = double(n-1) / double(arrmax-arrmin);
 
   // 2 - Calculate collisions [ O(n) time O(n) space ] 
-  collisions = (int *)calloc(m, sizeof(int)); // initially zeros
+  int * collisions = (int *)calloc(m, sizeof(int)); // initially zeros
   for (i = 0; i < m; ++i) 
-    collisions[int(double(arr[i]-arrmin)/double(arrmax-arrmin)*double(n-1))]++;
+    collisions[int(double(arr[i]-arrmin)*pos_const)]++;
 
   // 3 - Calculate offsets [ O(n) time O(1) space ] 
-  offset = 0;
+  int c_i;
+  int offset = 0;
   for (i = 0; i < m; ++i) {
     c_i = collisions[i];
     if (c_i==0) offset--; // there is an empty slot, decrease offset
@@ -52,7 +51,7 @@ void flashy_sort(T* arr, int n) {
   newArr = (T *)malloc(m * sizeof(T)); // initially zeros
   for (i = 0; i < m; ++i) {
     // Calculate position
-    pos = int(double(arr[i]-arrmin)/double(arrmax-arrmin)*double(n-1));
+    pos = int(double(arr[i]-arrmin)*pos_const);
     collisions[pos]--;
     newArr[pos + collisions[pos]] = arr[i];
     
@@ -84,37 +83,36 @@ void flashy_sort(T* arr, int n) {
 template <typename T>
 void flashy_sort_2(T* arr, int n) { 
   // Variables
-  int pos, i, j, offset, maxctr = 1;
+  int pos, i, j, maxctr = 1;
   int *collisions, *placements, c_i, p_i; 
   T arrmin, arrmax, tmp;
 
   // 1 - Find min and max, place max values at the end [ O(n) time, O(1) space ]
   // TODO this part buggy 
   arrmin = arr[0];
-  arrmax = arr[n-1];
-  for (i = 1; i < n-1; ++i) {
-    if (arr[i] > arrmax) { // new max found
-      arrmax = arr[i]; 
-      tmp = arr[n-1]; arr[n-1] = arr[i]; arr[i] = tmp;
-      maxctr=1;
-    } else if (arr[i] == arrmax) { // another equal max found
-      tmp = arr[n-maxctr-1]; arr[n-maxctr-1] = arr[i]; arr[i] = tmp;      
-      maxctr++;
-    }
-
-    if (arr[i] < arrmin) arrmin = arr[i]; 
-    
+  arrmax = arr[0];
+  for (i = 1; i < n; ++i) {
+    if (arr[i] > arrmax) arrmax = arr[i];   
+    if (arr[i] < arrmin) arrmin = arr[i];  
   }
   if (arrmin == arrmax) return; // max=min means sorted already
+  for (i = 0; i < n - maxctr; ++i) {
+    if (arr[i] == arrmax) {
+      maxctr++;
+      tmp = arr[i]; arr[i] = arr[n - maxctr]; arr[n-maxctr] = tmp;
+    }
+  }
 
-  const double pos_const = double(arrmax-arrmin) / double(n-1);
+  const size_t m = n - maxctr;
+  const double pos_const = double(n-1) / double(arrmax-arrmin);
+  
   // 2 - Calculate collisions [ O(n) time O(n) space ]
   collisions = (int *)calloc(n - maxctr, sizeof(int)); // initially zeros
   for (i = 0; i < n - maxctr; ++i) 
-    collisions[int(double(arr[i]-arrmin)/double(arrmax-arrmin)*double(n-1))]++;
+    collisions[int(double(arr[i]-arrmin) * pos_const)]++;
 
   // 3 - Calculate offsets [ O(n) time O(1) space ] 
-  offset = 0;
+  int offset = 0;
   for (i = 0; i < n - maxctr; ++i) {
     c_i = collisions[i];
     if (c_i==0) offset--; // there is an empty slot, decrease offset
