@@ -56,7 +56,6 @@ void evaluate(int N, T min, T max) {
     if (print) print_array(arr, N, "\nAfter Flash Sort:"); 
     cout << "Flash Sort " << (isSorted<T>(arr, N) ? "sorted" : "did not sort") << " in " << duration.count() << " ms" << endl;
   }
-  
 
   // Sort using flashy sort
   memcpy(arr, init_arr, N * sizeof(T)); 
@@ -70,7 +69,6 @@ void evaluate(int N, T min, T max) {
     if (print) print_array(arr, N, "\nAfter Flashy Sort:");  
     cout << "Flashy Sort " << (isSorted<T>(arr, N) ? "sorted" : "did not sort") << " in " << duration.count() << " ms" << endl;
   }
-  
 
   // Frees
   free(arr);
@@ -78,7 +76,6 @@ void evaluate(int N, T min, T max) {
 }
  
 int main(int argc, char *argv[]) {
-  // Problem settings
   int N = DEFAULT_SIZE; 
   double min = DEFAULT_MIN_VAL, max=DEFAULT_MAX_VAL; 
   datatype_e type = INTEGER;
@@ -98,7 +95,7 @@ int main(int argc, char *argv[]) {
     exit(-1);
   }
 
-  // Start
+
   if (!scripted)
     printf("Generating array of size %d, with values in range [%lf, %lf]\n\n", N, min, max); 
   if (type == INTEGER)      evaluate<int>(N, min, max);

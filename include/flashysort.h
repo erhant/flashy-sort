@@ -9,13 +9,13 @@
   */
 template <typename T>
 void flashy_sort(T* arr, int n) { 
-  // Variables
-  int pos, i, j, maxctr = 0;  
-  T arrmin, arrmax, tmp, *newArr;
+  int pos, i, j;  
+  T tmp;
 
   // 1 - Find min and max, place max values at the end [ O(n) time, O(1) space ] 
-  arrmin = arr[0];
-  arrmax = arr[0];
+  T arrmin = arr[0];
+  T arrmax = arr[0];
+  int maxctr = 0;
   for (i = 1; i < n; ++i) {
     if (arr[i] > arrmax) arrmax = arr[i];   
     if (arr[i] < arrmin) arrmin = arr[i];  
@@ -47,7 +47,7 @@ void flashy_sort(T* arr, int n) {
   } 
 
   // 4 - Placements [ O(n) time O(n) space ]
-  newArr = (T *)malloc(m * sizeof(T)); // initially zeros
+  T *newArr = (T *)malloc(m * sizeof(T)); // initially zeros
   for (i = 0; i < m; ++i) {
     // Calculate position
     pos = int(double(arr[i]-arrmin)*pos_const);
@@ -76,13 +76,13 @@ void flashy_sort(T* arr, int n) {
 template <typename T>
 void extra_unused_flashsort(T* arr, int n) { 
   // Variables
-  int pos, i, j, maxctr = 1;
-  int *collisions, *placements, c_i, p_i; 
-  T arrmin, arrmax, tmp;
+  int pos, i, j; 
+  T tmp;
 
   // 1 - Find min and max, place max values at the end [ O(n) time, O(1) space ]
-  arrmin = arr[0];
-  arrmax = arr[0];
+  T arrmin = arr[0];
+  T arrmax = arr[0];
+  int maxctr = 0;
   for (i = 1; i < n; ++i) {
     if (arr[i] > arrmax) arrmax = arr[i];   
     if (arr[i] < arrmin) arrmin = arr[i];  
@@ -91,7 +91,7 @@ void extra_unused_flashsort(T* arr, int n) {
   for (i = 0; i < n - maxctr; ++i) {
     if (arr[i] == arrmax) {
       maxctr++;
-      tmp = arr[i]; arr[i] = arr[n - maxctr]; arr[n-maxctr] = tmp;
+      tmp = arr[i]; arr[i] = arr[n - maxctr]; arr[n - maxctr] = tmp;
     }
   }
 
@@ -99,21 +99,21 @@ void extra_unused_flashsort(T* arr, int n) {
   const double pos_const = double(n-1) / double(arrmax-arrmin);
   
   // 2 - Calculate collisions [ O(n) time O(n) space ]
-  collisions = (int *)calloc(n - maxctr, sizeof(int)); // initially zeros
+  int *collisions = (int *)calloc(n - maxctr, sizeof(int)); // initially zeros
   for (i = 0; i < n - maxctr; ++i) 
     collisions[int(double(arr[i]-arrmin) * pos_const)]++;
 
   // 3 - Calculate offsets [ O(n) time O(1) space ] 
   int offset = 0;
   for (i = 0; i < n - maxctr; ++i) {
-    c_i = collisions[i];
-    if (c_i==0) offset--; // there is an empty slot, decrease offset
+    j = collisions[i];
+    if (j==0) offset--; // there is an empty slot, decrease offset
     collisions[i] += offset;
-    if (c_i>1) offset += c_i-1; // there are collisions, increase offset
+    if (j>1) offset += j-1; // there are collisions, increase offset
   } 
 
   // 4 - Calculate placements [ O(n) time O(n) space ]
-  placements = (int *)malloc((n - maxctr) * sizeof(int)); // initially zeros
+  int *placements = (int *)malloc((n - maxctr) * sizeof(int)); // initially zeros
   for (i = 0; i < n - maxctr; ++i) {
     // Calculate position
     pos = int(double(arr[i]-arrmin)/double(arrmax-arrmin)*double(n-1));
@@ -122,12 +122,12 @@ void extra_unused_flashsort(T* arr, int n) {
   } 
 
   // 5 - In-line placing [ O(n) time O(1) space ]
-  for (i = 0; i<n - maxctr; ++i) { 
-    p_i = placements[i];
+  for (i = 0; i< n - maxctr; ++i) { 
+    j = placements[i];
     // Check index if it has already been swapped before
-    while (p_i < i) p_i = placements[p_i];
+    while (j < i) j = placements[j];
     // Swap the position of elements
-    tmp = arr[i]; arr[i] = arr[p_i]; arr[p_i] = tmp;
+    tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
   } 
 
   // 6 - Insertion Sort [ O(n^2) time worst, but is working on a nearly sorted array ]
