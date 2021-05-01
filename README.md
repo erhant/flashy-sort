@@ -1,5 +1,5 @@
 # Flashy Sort
-**Flashy Sort** is a sorting algorithm similar to **Flash Sort** I had written around 2016 during my Sophomore year. It follows the same idea behind **Flash Sort**.
+**Flashy Sort** is a sorting algorithm similar to **Flash Sort** I had written around 2016 during my Sophomore year. It follows the same idea behind **Flash Sort** (though I didnt know about **Flash Sort** at the time):
 
 ```
     pos     arr
