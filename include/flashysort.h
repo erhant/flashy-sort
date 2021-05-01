@@ -13,8 +13,7 @@ void flashy_sort(T* arr, int n) {
   int pos, i, j, maxctr = 0;  
   T arrmin, arrmax, tmp, *newArr;
 
-  // 1 - Find min and max, place max values at the end [ O(n) time, O(1) space ]
-  // TODO need a better max-min finding placing code, the old one is buggy and this one is redundant
+  // 1 - Find min and max, place max values at the end [ O(n) time, O(1) space ] 
   arrmin = arr[0];
   arrmax = arr[0];
   for (i = 1; i < n; ++i) {
@@ -73,22 +72,15 @@ void flashy_sort(T* arr, int n) {
   free(newArr); 
 }
 
- /**
-  * @brief Sort an array of numeric values using Flashier Sort.
-  * 
-  * @tparam T: type of the array
-  * @param arr: array pointer
-  * @param n: size of the array 
-  */
+// Sandbox for trying new stuff
 template <typename T>
-void flashy_sort_2(T* arr, int n) { 
+void extra_unused_flashsort(T* arr, int n) { 
   // Variables
   int pos, i, j, maxctr = 1;
   int *collisions, *placements, c_i, p_i; 
   T arrmin, arrmax, tmp;
 
   // 1 - Find min and max, place max values at the end [ O(n) time, O(1) space ]
-  // TODO this part buggy 
   arrmin = arr[0];
   arrmax = arr[0];
   for (i = 1; i < n; ++i) {

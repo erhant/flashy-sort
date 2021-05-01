@@ -8,9 +8,6 @@ Code modified by Erhan Tezcan.
 Taken from http://www.yendor.com/programming/sort/Jann/SortLibrary/SortLibrary/flashsort.c
 and modified to not use recursion.
 */
- 
- // TODO: fix max finding swapping thing
- 
 template <typename T>
 void flash_sort(T* a, int n, double scaleFactor = 0.1) {
 	int *l, nmin, nmax, i, j, k, nmove; 
@@ -28,7 +25,6 @@ void flash_sort(T* a, int n, double scaleFactor = 0.1) {
 
 	T c1 = double(m-1.0) / double(a[nmax]-a[nmin]);
 	T min = a[nmin];   
-	// l[0] = -1; // since the base of the "a" (data) array is 0
 
 	for (i = 0; i < n; ++i) {
 		k = int(c1*(a[i]-min));
