@@ -88,7 +88,7 @@ int main(int argc, char *argv[]) {
     else if (MATCH_INPUT("--int"))    { type = INTEGER; }           // use int array
     else if (MATCH_INPUT("--float"))  { type = FLOAT; }             // use float array
     else if (MATCH_INPUT("--double")) { type = DOUBLE; }            // use double array
-    else    {printf("Usage: %s [-n <size>] [-p] [--min <num>] [--max <num>] [--int | --float | --double]\n", argv[0]); }
+    else    {printf("Usage: %s [-n <size>] [-p] [--min <num>] [--max <num>] [--int | --float | --double]\n", argv[0]); exit(-1);}
   }
   if (N <= 0) {
     printf("Please enter a positive integer for size!\n");
