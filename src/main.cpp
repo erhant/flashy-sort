@@ -36,7 +36,6 @@ void evaluate(int N, T min, T max) {
   // Timers  
   auto start = Time::now();
   auto end = Time::now();
-  auto elapsed_seconds = end - start; 
   ms duration;
 
   // Create base random array
