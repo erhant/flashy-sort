@@ -1,1 +1,0 @@
-You can find the Java implementation and JavaScript implementation of Flash Sort (not Flashy Sort) here.
