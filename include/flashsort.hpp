@@ -13,8 +13,9 @@ and modified to not use recursion.
 
 #pragma once
 
-using namespace std;
 #include <cstring>
+
+using namespace std;
 
 template <typename T>
 void flash_sort(T *a, const int n, const double scaleFactor = 0.1);
