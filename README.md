@@ -33,6 +33,4 @@ sort.exe [-n <size>] [-p] [--min <num>] [--max <num>] [--int | --float | --doubl
 --float : Use float array
 --double : Use double array
 ```
-
-## TODOS
-- Some inputs give segfault, such as `./sort.exe -n 1003000 -s --double`
+ 
